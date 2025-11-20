@@ -1,47 +1,63 @@
-🎬 Movie Recommendation System (Content-Based)
+🎬 Movie Recommendation System
 
-This project builds a content-based movie recommender system using the MovieLens dataset.
-The system recommends movies based on genre similarity, using a cosine similarity matrix built from one-hot encoded genre features.
+A content-based recommender using movie genres
 
-It is a simple and intuitive approach to building a recommendation engine without requiring user history or ratings predictions.
+Overview
 
-📌 Project Overview
+This project builds a content-based movie recommendation system using movie metadata from the MovieLens dataset. The goal is to recommend movies that are similar based on shared genres. Unlike collaborative filtering, which relies on user behaviors, this approach recommends films by analyzing the content of each movie directly.
 
-This project:
+The system transforms genre information into a structured format and computes similarity scores between all movies. Users can enter a movie title and receive recommendations of films with similar characteristics.
 
-Loads movie metadata (movies.csv) and user ratings (ratings.csv)
+Data Description
 
-Merges both datasets on movieId
+The dataset includes two primary files:
 
-Converts the genres column into a binary matrix (one-hot encoding)
+  -   movies.csv – Contains movie titles, unique IDs, and genre labels
 
-Computes cosine similarity between all movies
+  -   ratings.csv – Contains user ratings for each movie
 
-Includes a function recommend_movies() that returns the top recommended titles based on a movie you provide
+Movies typically have genre strings such as:
+Adventure|Children|Fantasy
+These are split and converted into binary indicator columns so each movie can be compared based on genre composition.
 
-📂 Dataset Requirements
+The recommendation system uses these encoded genres to match similar films.
 
-Place these two files in the project directory:
+Methods
 
-movies.csv
+To build the recommender:
 
-movieId
+  -  Movie and rating datasets were merged using movieId.
 
-title
+  - Genres were one-hot encoded to create a matrix indicating which genres each movie belongs to.
 
-genres (pipe-separated, e.g., Adventure|Children|Fantasy)
+  -  Cosine similarity was calculated between all movie vectors to measure how similar each pair of films is.
 
-ratings.csv
+A function was created to retrieve the top recommended titles based on the similarity scores.
 
-userId
+This approach ensures that movies with similar thematic or categorical elements appear in the results.
 
-movieId
+Example
 
-rating
+When a user enters a movie such as “Jumanji (1995)”, the system identifies films with similar genre patterns, returning results such as:
 
-timestamp
+  -  The Indian in the Cupboard (1995)
 
-These datasets are merged so genre and title information is aligned with rating data.
+  -  The NeverEnding Story III (1994)
 
-🧠 Core Logic
-1. Load datasets
+  -  Escape to Witch Mountain (1975)
+
+  -  Return to Oz (1985)
+
+These recommendations reflect shared attributes such as family-friendly themes or adventure and fantasy elements.
+
+Requirements
+
+To run the notebook or script, the following Python libraries are required:
+
+  -  pandas
+
+  -  numpy
+
+  -  scikit-learn
+
+These can be installed with:
